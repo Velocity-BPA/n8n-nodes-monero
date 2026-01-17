@@ -1,0 +1,80 @@
+{
+  "name": "n8n-nodes-monero",
+  "version": "1.0.0",
+  "description": "A comprehensive n8n community node for Monero (XMR) blockchain providing wallet management, transactions, mining, and privacy-focused operations with full RPC support.",
+  "license": "BUSL-1.1",
+  "author": {
+    "name": "Velocity BPA",
+    "email": "licensing@velobpa.com",
+    "url": "https://velobpa.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Velocity-BPA/n8n-nodes-monero.git"
+  },
+  "homepage": "https://velobpa.com",
+  "keywords": [
+    "n8n",
+    "n8n-community-node-package",
+    "monero",
+    "xmr",
+    "cryptocurrency",
+    "blockchain",
+    "privacy",
+    "ring-signatures",
+    "wallet",
+    "mining",
+    "rpc"
+  ],
+  "engines": {
+    "node": ">=18.10",
+    "pnpm": ">=9.1"
+  },
+  "packageManager": "pnpm@9.1.4",
+  "main": "dist/nodes/Monero/Monero.node.js",
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/MoneroNetworkApi.credentials.js",
+      "dist/credentials/MoneroWalletRpcApi.credentials.js",
+      "dist/credentials/MoneroRemoteNodeApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/Monero/Monero.node.js",
+      "dist/nodes/Monero/MoneroTrigger.node.js"
+    ]
+  },
+  "scripts": {
+    "build": "tsc && gulp build:icons",
+    "dev": "tsc --watch",
+    "format": "prettier nodes credentials --write",
+    "lint": "eslint nodes credentials package.json",
+    "lint:fix": "eslint nodes credentials package.json --fix",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "prepublishOnly": "npm run build && npm run lint"
+  },
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-n8n-nodes-base": "^1.16.1",
+    "gulp": "^4.0.2",
+    "jest": "^29.7.0",
+    "n8n-workflow": "^1.22.0",
+    "prettier": "^3.2.0",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.3.0"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "bignumber.js": "^9.1.2"
+  }
+}
