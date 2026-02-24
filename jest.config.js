@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2026 Velocity BPA, LLC
+ * Licensed under the Business Source License 1.1
+ */
+
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
@@ -5,14 +10,15 @@ module.exports = {
   collectCoverageFrom: [
     'nodes/**/*.ts',
     'credentials/**/*.ts',
-    '!**/node_modules/**',
-    '!**/dist/**',
+    '!**/*.d.ts',
+    '!**/index.ts',
   ],
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov', 'html'],
   moduleFileExtensions: ['ts', 'js', 'json'],
+  roots: ['<rootDir>'],
   transform: {
-    '^.+\\.ts$': 'ts-jest',
+    '^.+\.ts$': 'ts-jest',
   },
-  verbose: true,
+  testTimeout: 30000,
 };
