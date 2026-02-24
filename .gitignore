@@ -4,11 +4,17 @@ node_modules/
 # Build output
 dist/
 
+# Environment
+.env
+.env.local
+.env.production
+
+# Coverage
+coverage/
+
 # IDE
-.idea/
 .vscode/
-*.swp
-*.swo
+.idea/
 
 # OS
 .DS_Store
@@ -17,21 +23,16 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
-pnpm-debug.log*
 
-# Environment
-.env
-.env.local
-.env.*.local
+# Runtime
+*.tgz
+*.tar.gz
 
-# Test coverage
-coverage/
+# Compiled JavaScript (except config files)
+*.js
+!jest.config.js
+!gulpfile.js
+!.eslintrc.js
 
-# Temporary files
-*.tmp
-*.temp
-.cache/
-
-# Lock files (using pnpm)
-package-lock.json
-yarn.lock
+# TypeScript cache
+*.tsbuildinfo
