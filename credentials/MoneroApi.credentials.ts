@@ -1,52 +1,34 @@
-import {
-	ICredentialType,
-	INodeProperties,
-} from 'n8n-workflow';
+import { ICredentialType, INodeProperties } from 'n8n-workflow';
 
 export class MoneroApi implements ICredentialType {
 	name = 'moneroApi';
 	displayName = 'Monero API';
-	documentationUrl = 'https://www.getmonero.org/resources/developer-guides/daemon-rpc.html';
+	documentationUrl = 'https://docs.getmonero.org/interacting/monero-wallet-rpc-reference/';
 	properties: INodeProperties[] = [
 		{
-			displayName: 'Daemon URL',
-			name: 'daemonUrl',
+			displayName: 'API Base URL',
+			name: 'baseUrl',
 			type: 'string',
-			default: 'http://localhost:18081/json_rpc',
-			description: 'The URL of the Monero daemon RPC endpoint',
+			default: 'http://localhost:18082/json_rpc',
+			description: 'Base URL of the Monero RPC API (Wallet RPC: port 18082, Daemon RPC: port 18081)',
 			required: true,
-		},
-		{
-			displayName: 'Wallet RPC URL',
-			name: 'walletUrl',
-			type: 'string',
-			default: 'http://localhost:18083/json_rpc',
-			description: 'The URL of the Monero wallet RPC endpoint',
-			required: false,
 		},
 		{
 			displayName: 'Username',
 			name: 'username',
 			type: 'string',
 			default: '',
-			description: 'Username for HTTP digest authentication (if required)',
-			required: false,
+			description: 'Username for HTTP Digest Authentication (optional)',
 		},
 		{
 			displayName: 'Password',
 			name: 'password',
-			type: 'hidden',
+			type: 'string',
+			typeOptions: {
+				password: true,
+			},
 			default: '',
-			description: 'Password for HTTP digest authentication (if required)',
-			required: false,
-		},
-		{
-			displayName: 'Wallet Password',
-			name: 'walletPassword',
-			type: 'hidden',
-			default: '',
-			description: 'Password for wallet operations (if wallet is password protected)',
-			required: false,
+			description: 'Password for HTTP Digest Authentication (optional)',
 		},
 	];
 }
