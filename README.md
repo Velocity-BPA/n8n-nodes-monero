@@ -8,25 +8,25 @@
 >
 > For licensing information, visit https://velobpa.com/licensing or contact licensing@velobpa.com.
 
-A comprehensive n8n community node for integrating with Monero blockchain operations. Features 6 core resources with full support for blockchain queries, transaction management, wallet operations, transfers, mining activities, and address utilities for privacy-focused cryptocurrency workflows.
+A comprehensive n8n community node for integrating with Monero cryptocurrency operations. This node provides 5 resources covering wallet management, transaction handling, address operations, blockchain queries, and mining functionality to enable seamless Monero automation workflows.
 
 ![n8n Community Node](https://img.shields.io/badge/n8n-Community%20Node-blue)
 ![License](https://img.shields.io/badge/license-BSL--1.1-blue)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)
 ![Monero](https://img.shields.io/badge/Monero-XMR-orange)
-![Privacy](https://img.shields.io/badge/Privacy-Focused-green)
-![Blockchain](https://img.shields.io/badge/Blockchain-Integration-purple)
+![Cryptocurrency](https://img.shields.io/badge/Crypto-Wallet-green)
+![Privacy](https://img.shields.io/badge/Privacy-Coin-purple)
 
 ## Features
 
-- **Blockchain Information** - Query network status, block heights, difficulty, and chain statistics
-- **Transaction Operations** - Create, broadcast, monitor, and analyze Monero transactions
-- **Wallet Management** - Complete wallet lifecycle including creation, backup, restoration, and synchronization
-- **Secure Transfers** - Execute private transfers with ring signatures and stealth addresses
-- **Mining Operations** - Monitor mining status, hashrates, and pool connectivity
-- **Address Utilities** - Generate, validate, and manage Monero addresses and subaddresses
-- **Privacy-First** - Built-in support for Monero's privacy features including RingCT and bulletproofs
-- **Real-time Monitoring** - Track confirmations, mempool status, and network events
+- **Wallet Management** - Create, manage, and query Monero wallets with full balance and transaction history access
+- **Transaction Processing** - Send, receive, and track Monero transactions with comprehensive fee estimation
+- **Address Operations** - Generate new addresses, validate address formats, and manage address labels
+- **Blockchain Queries** - Access real-time blockchain data, block information, and network statistics
+- **Mining Integration** - Monitor mining operations, hashrates, and pool statistics
+- **Privacy Features** - Leverage Monero's privacy features including stealth addresses and ring signatures
+- **Multi-Wallet Support** - Manage multiple wallets simultaneously with secure credential handling
+- **Real-time Monitoring** - Track transaction confirmations and blockchain events in real-time
 
 ## Installation
 
@@ -61,158 +61,129 @@ n8n start
 
 | Field | Description | Required |
 |-------|-------------|----------|
-| RPC Endpoint | Monero daemon RPC URL (e.g., http://localhost:18081) | Yes |
-| Wallet RPC Endpoint | Monero wallet RPC URL (e.g., http://localhost:18083) | Yes |
-| RPC Username | Username for RPC authentication | No |
-| RPC Password | Password for RPC authentication | No |
-| API Key | Custom API key for additional authentication | No |
+| API Key | Monero wallet RPC API key or authentication token | Yes |
+| RPC Host | Monero wallet RPC server hostname or IP address | Yes |
+| RPC Port | Monero wallet RPC server port (default: 18082) | Yes |
+| Username | RPC authentication username (if required) | No |
+| Password | RPC authentication password (if required) | No |
+| SSL | Enable SSL/TLS for secure connections | No |
 
 ## Resources & Operations
 
-### 1. Blockchain Info
+### 1. Wallet
 
 | Operation | Description |
 |-----------|-------------|
-| Get Block Count | Retrieve current blockchain height |
-| Get Block Header | Get block header information by height or hash |
-| Get Block | Retrieve complete block data |
-| Get Chain Info | Get general blockchain information and statistics |
-| Get Difficulty | Retrieve current network difficulty |
-| Get Fee Estimate | Get estimated transaction fees |
-| Get Transaction Pool | View pending transactions in mempool |
+| Create | Create a new Monero wallet with specified parameters |
+| Open | Open an existing wallet for operations |
+| Close | Close the currently opened wallet |
+| Get Balance | Retrieve wallet balance including locked and unlocked amounts |
+| Get Height | Get the current wallet sync height |
+| Refresh | Refresh wallet data from the blockchain |
+| Get Address | Retrieve the primary wallet address |
+| Make URI | Create a Monero payment URI |
+| Parse URI | Parse a Monero payment URI |
 
-### 2. Transaction Operations
-
-| Operation | Description |
-|-----------|-------------|
-| Get Transaction | Retrieve transaction details by hash |
-| Send Raw Transaction | Broadcast a signed transaction to network |
-| Create Transaction | Build unsigned transaction |
-| Sign Transaction | Sign transaction with private keys |
-| Verify Transaction | Validate transaction integrity |
-| Get Transaction Status | Check confirmation status |
-| Search Transactions | Query transactions by various criteria |
-
-### 3. Wallet Management
+### 2. Transaction
 
 | Operation | Description |
 |-----------|-------------|
-| Create Wallet | Generate new wallet with mnemonic seed |
-| Open Wallet | Load existing wallet file |
-| Close Wallet | Safely close wallet connection |
-| Get Wallet Info | Retrieve wallet metadata and status |
-| Backup Wallet | Export wallet keys and seed |
-| Restore Wallet | Recover wallet from seed or keys |
-| Refresh Wallet | Synchronize wallet with blockchain |
-| Set Wallet Password | Update wallet encryption password |
+| Send | Send Monero to one or more addresses |
+| Get Transfers | Retrieve transaction history with filtering options |
+| Get Transfer by ID | Get detailed information about a specific transaction |
+| Relay Transaction | Relay a previously created transaction to the network |
+| Submit Transfer | Create and submit a transaction in one operation |
+| Estimate Fee | Estimate transaction fees for a given transfer |
+| Prove Payment | Generate cryptographic proof of payment |
+| Check Payment | Verify a payment proof |
 
-### 4. Wallet Transfers
-
-| Operation | Description |
-|-----------|-------------|
-| Transfer | Send XMR to one or more recipients |
-| Transfer Split | Send with automatic input splitting |
-| Sweep All | Transfer all available balance |
-| Sweep Single | Transfer specific output |
-| Get Transfers | Retrieve transfer history |
-| Get Transfer Details | Get detailed transfer information |
-| Create Unsigned Transfer | Build unsigned transfer |
-| Submit Transfer | Submit signed transfer |
-
-### 5. Mining Operations
+### 3. Address
 
 | Operation | Description |
 |-----------|-------------|
-| Start Mining | Begin mining with specified threads |
-| Stop Mining | Stop mining operations |
-| Get Mining Status | Check current mining state |
-| Set Mining Threads | Adjust number of mining threads |
-| Get Hashrate | Retrieve current hashrate |
-| Get Mining Stats | Get detailed mining statistics |
+| Create | Generate a new subaddress |
+| Get All | List all addresses in the wallet |
+| Label | Set or update an address label |
+| Get Index | Get the index of a specific address |
+| Validate | Validate a Monero address format |
+| Create Integrated | Create an integrated address with payment ID |
+| Split Integrated | Extract address and payment ID from integrated address |
 
-### 6. Address Operations
+### 4. Blockchain
 
 | Operation | Description |
 |-----------|-------------|
-| Get Address | Retrieve primary wallet address |
-| Create Address | Generate new subaddress |
-| Get Address Index | Find address index by address string |
-| Label Address | Set label for address |
-| Get Address Book | Retrieve saved addresses |
-| Add Address Book Entry | Save new address to address book |
-| Delete Address Book Entry | Remove address from address book |
-| Validate Address | Check if address is valid |
+| Get Height | Get current blockchain height |
+| Get Block | Retrieve block information by height or hash |
+| Get Block Header | Get block header information |
+| Get Last Block | Get information about the most recent block |
+| Get Connections | Get peer connection information |
+| Get Info | Get general blockchain and network information |
+| Hard Fork Info | Get hard fork status and information |
+| Get Version | Get daemon version information |
+
+### 5. Mining
+
+| Operation | Description |
+|-----------|-------------|
+| Start | Start mining with specified number of threads |
+| Stop | Stop mining operations |
+| Get Status | Get current mining status and statistics |
+| Get Hashrate | Retrieve current mining hashrate |
+| Set Threads | Configure number of mining threads |
+| Get Template | Get block template for mining |
+| Submit Block | Submit a mined block to the network |
 
 ## Usage Examples
 
 ```javascript
-// Get current blockchain height
-const blockHeight = await this.helpers.request({
-  method: 'POST',
-  url: 'http://localhost:18081/json_rpc',
-  body: {
-    jsonrpc: '2.0',
-    id: '0',
-    method: 'get_block_count'
-  }
-});
-
-// Send XMR transfer
-const transfer = await this.helpers.request({
-  method: 'POST',
-  url: 'http://localhost:18083/json_rpc',
-  body: {
-    jsonrpc: '2.0',
-    id: '0',
-    method: 'transfer',
-    params: {
-      destinations: [{
-        amount: 1000000000000, // 1 XMR in atomic units
-        address: '4AdUndXHHZ6cfufTMvppY6JwXNouMBzSkbLYfpAV5Usx3skxNgYeYTRJ5UGnWaVFMKKhTM6Xzwx5pB7KKTKzM1X8'
-      }],
-      priority: 1,
-      mixin: 10
+// Send Monero to multiple recipients
+{
+  "destinations": [
+    {
+      "amount": 1000000000000, // 1 XMR in atomic units
+      "address": "4AdUndXHHZ6cfufTMvppY6JwXNouMBzSkbLYfpAV5Usx3skxNgYeYTRJ5KqsZj8RXkRMCUP6t5tUdqsXs1v5RpSoMXNL5WD"
     }
-  }
-});
+  ],
+  "priority": 1,
+  "get_tx_key": true
+}
 
-// Create new subaddress
-const subaddress = await this.helpers.request({
-  method: 'POST',
-  url: 'http://localhost:18083/json_rpc',
-  body: {
-    jsonrpc: '2.0',
-    id: '0',
-    method: 'create_address',
-    params: {
-      account_index: 0,
-      label: 'Payment Address #1'
-    }
-  }
-});
+// Get wallet transaction history
+{
+  "in": true,
+  "out": true,
+  "pending": false,
+  "failed": false,
+  "pool": true,
+  "filter_by_height": true,
+  "min_height": 2000000,
+  "max_height": 2100000
+}
 
-// Get mining status
-const miningStatus = await this.helpers.request({
-  method: 'POST',
-  url: 'http://localhost:18081/json_rpc',
-  body: {
-    jsonrpc: '2.0',
-    id: '0',
-    method: 'mining_status'
-  }
-});
+// Create a new subaddress with label
+{
+  "account_index": 0,
+  "label": "Payment Address for Client #123"
+}
+
+// Get current blockchain information
+{
+  "include_connections": true,
+  "include_mining_info": true
+}
 ```
 
 ## Error Handling
 
 | Error | Description | Solution |
 |-------|-------------|----------|
-| Connection Refused | Cannot connect to Monero daemon/wallet RPC | Verify daemon and wallet RPC are running and accessible |
-| Invalid Address | Provided address format is incorrect | Validate address format and network type (mainnet/testnet) |
-| Insufficient Funds | Wallet balance too low for transaction | Check wallet balance and reduce transaction amount |
-| Transaction Too Large | Transaction exceeds maximum size limits | Use transfer_split to break into smaller transactions |
-| Wrong Password | Wallet password is incorrect | Verify wallet password in credentials |
-| Wallet Not Found | Specified wallet file doesn't exist | Check wallet file path and permissions |
+| Wallet Not Open | Attempted operation without an open wallet | Open a wallet before performing operations |
+| Insufficient Funds | Transaction amount exceeds available balance | Check wallet balance and reduce transaction amount |
+| Invalid Address | Provided Monero address format is incorrect | Validate address format and ensure correct network |
+| Connection Failed | Unable to connect to Monero daemon/wallet RPC | Verify RPC host, port, and network connectivity |
+| Transaction Failed | Transaction could not be created or sent | Check network status, fees, and transaction parameters |
+| Authentication Error | Invalid RPC credentials or API key | Verify username, password, and API key configuration |
 
 ## Development
 
@@ -257,5 +228,5 @@ Contributions are welcome! Please ensure:
 ## Support
 
 - **Issues**: [GitHub Issues](https://github.com/Velocity-BPA/n8n-nodes-monero/issues)
-- **Monero Documentation**: [getmonero.org/resources/developer-guides](https://www.getmonero.org/resources/developer-guides/)
-- **RPC Documentation**: [getmonero.org/resources/developer-guides/daemon-rpc.html](https://www.getmonero.org/resources/developer-guides/daemon-rpc.html)
+- **Monero Documentation**: [getmonero.org/resources/developer-guides](https://getmonero.org/resources/developer-guides)
+- **Monero RPC Reference**: [getmonero.org/resources/developer-guides/wallet-rpc.html](https://getmonero.org/resources/developer-guides/wallet-rpc.html)
